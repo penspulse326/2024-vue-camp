@@ -16,7 +16,8 @@
     "week3:preview": "pnpm run -C apps/week-3 preview",
     "final:dev": "pnpm run -C apps/final dev",
     "final:build": "pnpm run -C apps/final build",
-    "final:preview": "pnpm run -C apps/final preview"
+    "final:preview": "pnpm run -C apps/final preview",
+    "build": "npm-run-all2 --parallel week1:build week2:build week3:build final:build"
   },
   "dependencies": {
     "vue": "^3.4.29"
