@@ -4,7 +4,38 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "week1:dev": "pnpm run -C apps/week-1 dev",
+    "week1:build": "pnpm run -C apps/week-1 build",
+    "week1:preview": "pnpm run -C apps/week-1 preview",
+    "week2:dev": "pnpm run -C apps/week-2 dev",
+    "week2:build": "pnpm run -C apps/week-2 build",
+    "week2:preview": "pnpm run -C apps/week-2 preview",
+    "week3:dev": "pnpm run -C apps/week-3 dev",
+    "week3:build": "pnpm run -C apps/week-3 build",
+    "week3:preview": "pnpm run -C apps/week-3 preview",
+    "final:dev": "pnpm run -C apps/final dev",
+    "final:build": "pnpm run -C apps/final build",
+    "final:preview": "pnpm run -C apps/final preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.14.5",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "npm-run-all2": "^6.2.0",
+    "prettier": "^3.2.5",
+    "typescript": "~5.4.0",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.21"
   },
   "keywords": [],
   "author": "",
