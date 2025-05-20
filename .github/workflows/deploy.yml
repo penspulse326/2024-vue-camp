@@ -5,23 +5,31 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# 設置 GitHub Pages 部署所需的權限
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# 允許一個並行部署
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  # 為每個應用構建單獨的構建作業
+  build:
     runs-on: ubuntu-latest
-    
     strategy:
       matrix:
         app: [week-1, week-2, week-3, final]
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -51,12 +59,49 @@ jobs:
         run: |
           cd apps/${{ matrix.app }}
           pnpm build
-      
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          folder: apps/${{ matrix.app }}/dist
-          clean: true
-          target-folder: ${{ matrix.app }}
-          branch: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }} 
+          name: ${{ matrix.app }}-dist
+          path: apps/${{ matrix.app }}/dist
+          retention-days: 1
+
+  # 合併所有構建結果並部署
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+
+      - name: Prepare deployment structure
+        run: |
+          mkdir -p final_dist
+          # 複製根目錄的 index.html 到部署目錄
+          cp index.html final_dist/
+          # 複製各應用程式的構建結果到對應子目錄
+          for app_dir in week-1 week-2 week-3 final; do
+            mkdir -p final_dist/$app_dir
+            cp -r artifacts/$app_dir-dist/* final_dist/$app_dir/
+          done
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'final_dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 
