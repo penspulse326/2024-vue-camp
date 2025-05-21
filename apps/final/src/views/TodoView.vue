@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { onBeforeMount, onMounted, ref, watch } from 'vue';
+import { onBeforeMount, ref, watch } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { API_TODO } from '@/api/endpoints';
 import LogoLink from '@/components/LogoLink.vue';
@@ -77,16 +77,11 @@ onBeforeMount(async () => {
 
 <template>
   <main class="f-center h-[100dvh] bg-gradient-to-b from-secondary to-primary">
-    <nav
-      class="fixed top-0 flex justify-between items-center gap-4 px-4 py-2 w-full"
-    >
+    <nav class="fixed top-0 flex justify-between items-center gap-4 px-4 py-2 w-full">
       <LogoLink />
       <div class="flex gap-4 text-lg text-gray-900 font-bold">
         <span>{{ userInfo.nickname }}</span>
-        <RouterLink
-          to="/auth/login"
-          class="underline duration-100 hover:scale-105"
-        >
+        <RouterLink to="/auth/login" class="underline duration-100 hover:scale-105">
           登出
         </RouterLink>
       </div>
@@ -104,10 +99,6 @@ onBeforeMount(async () => {
       </div>
     </div>
   </main>
-  <MessageModal
-    :is-open="isModalOpened"
-    :message="message"
-    @close="handleCloseModal"
-  />
+  <MessageModal :is-open="isModalOpened" :message="message" @close="handleCloseModal" />
   <LoadingAnime v-if="isLoading" />
 </template>
