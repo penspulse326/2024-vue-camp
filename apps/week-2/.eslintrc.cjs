@@ -3,5 +3,5 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: false,
-  extends: ['../../.eslintrc.js']
+  extends: ['../../.eslintrc.cjs']
 };

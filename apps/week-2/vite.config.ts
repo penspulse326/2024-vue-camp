@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/2024-vue-camp/week-2/',
+  base: process.env.NODE_ENV === 'production' ? '/2024-vue-camp/week-2/' : '/',
   plugins: [vue()],
   resolve: {
     alias: {
