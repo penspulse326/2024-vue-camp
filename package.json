@@ -17,7 +17,8 @@
     "final:dev": "pnpm --filter @apps/final dev",
     "final:build": "pnpm --filter @apps/final build",
     "final:preview": "pnpm --filter @apps/final preview",
-    "build": "npm-run-all2 --parallel week1:build week2:build week3:build final:build"
+    "shared-ui:build": "pnpm --filter @packages/shared-ui build",
+    "build": "pnpm shared-ui:build && npm-run-all2 --parallel week1:build week2:build week3:build final:build"
   },
   "dependencies": {
     "vue": "^3.4.29"
