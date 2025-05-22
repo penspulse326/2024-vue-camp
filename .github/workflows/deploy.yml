@@ -55,6 +55,14 @@ jobs:
       - name: Build shared-ui
         run: pnpm shared-ui:build
 
+      # 將共用元件庫的構建結果保存為 artifact
+      - name: Upload shared-ui artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-ui-dist
+          path: packages/shared-ui/dist
+          retention-days: 1
+
   # 為每個應用構建單獨的構建作業
   build:
     needs: build-shared-ui
@@ -93,6 +101,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      # 下載共用元件庫的構建結果
+      - name: Download shared-ui artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: shared-ui-dist
+          path: packages/shared-ui/dist
 
       - name: Build
         run: |
