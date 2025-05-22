@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineProps<{ label: string }>();
+const props = defineProps<{ label: string }>();
 </script>
 
 <template>
   <span class="shared-badge">
-    {{ label }}
+    {{ props.label }}
   </span>
 </template>
 
