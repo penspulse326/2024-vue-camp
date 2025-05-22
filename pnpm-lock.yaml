@@ -83,7 +83,11 @@ importers:
         specifier: ^3.4.10
         version: 3.4.17
 
-  apps/week-1: {}
+  apps/week-1:
+    dependencies:
+      '@packages/shared-ui':
+        specifier: workspace:*
+        version: link:../../packages/shared-ui
 
   apps/week-2:
     dependencies:
@@ -103,6 +107,8 @@ importers:
       sass:
         specifier: ^1.77.8
         version: 1.89.0
+
+  packages/shared-ui: {}
 
 packages:
 

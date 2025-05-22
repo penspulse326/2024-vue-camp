@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import drinkStock from './data.json';
+import { SharedButton, SharedBadge } from '@packages/shared-ui';
 
 const drinkList = ref<Drink[] | null>(null);
 const editedItem = ref<EditedItem | null>(null);
@@ -85,6 +86,8 @@ interface EditedItem {
       </tbody>
     </table>
   </main>
+  <SharedButton>123</SharedButton>
+  <SharedBadge label="123" />
 </template>
 
 <style scoped>
