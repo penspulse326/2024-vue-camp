@@ -80,7 +80,7 @@ interface EditedItem {
           <td>
             <button type="button" @click="item.stock--" class="btn">-</button>
             <span class="stock">{{ item.stock }}</span
-            ><button type="button" @click="item.stock--" class="btn">+</button>
+            ><button type="button" @click="item.stock++" class="btn">+</button>
           </td>
         </tr>
       </tbody>
